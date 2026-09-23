@@ -1,0 +1,599 @@
+/* ---------- Tokens ---------- */
+:root {
+  --slate: #0b0f19;
+  --slate-2: #141a2b;
+  --card: #171e31;
+  --line: rgba(255, 255, 255, 0.08);
+  --ink: #e7eaf2;
+  --ink-dim: #9aa3b8;
+  --cyan: #00f0ff;
+  --violet: #7c3aed;
+}
+
+/* ---------- Base ---------- */
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: var(--slate);
+  color: var(--ink);
+  font-family: "Space Grotesk", system-ui, sans-serif;
+  line-height: 1.5;
+}
+
+.wrap {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+label {
+  display: block;
+  font-size: 14px;
+  color: var(--ink-dim);
+  margin-bottom: 8px;
+}
+
+input[type="range"] {
+  width: 100%;
+  accent-color: var(--cyan);
+}
+
+/* ---------- Navbar ---------- */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--slate);
+  border-bottom: 1px solid var(--line);
+}
+
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 30px 24px;
+}
+
+.brand {
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links a {
+  color: var(--ink-dim);
+  text-decoration: none;
+  font-size: 15px;
+}
+
+.nav-links a:hover {
+  color: var(--ink);
+}
+
+.nav-links a:focus-visible {
+  outline: 2px solid var(--violet);
+  outline-offset: 4px;
+}
+
+.nav-cta {
+  color: var(--slate) !important;
+  background: var(--cyan);
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: 600;
+}
+
+.nav-cta:hover {
+  color: var(--slate) !important;
+  background: #33f3ff;
+}
+
+@media (max-width: 640px) {
+  .nav-links {
+    gap: 16px;
+  }
+  .nav-links .hide-mobile {
+    display: none;
+  }
+}
+
+/* ---------- Hero ---------- */
+.hero {
+  position: relative;
+  padding: 80px 0;
+  border-bottom: 1px solid var(--line);
+  border-left: 4px solid var(--violet);
+}
+
+.hero-inner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 48px;
+  padding-left: 20px;
+}
+
+.hero-copy {
+  max-width: 480px;
+  flex: 1 1 380px;
+}
+
+.eyebrow {
+  color: var(--cyan);
+  font-size: 15px;
+  font-weight: 500;
+  margin: 0 0 18px;
+}
+
+h1 {
+  font-size: clamp(34px, 5vw, 52px);
+  line-height: 1.08;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin: 0 0 20px;
+}
+
+.sub {
+  color: var(--ink-dim);
+  font-size: 18px;
+  max-width: 46ch;
+  margin: 0 0 32px;
+}
+
+@media (max-width: 760px) {
+  .hero-inner {
+    flex-wrap: wrap;
+  }
+}
+
+/* ---------- CTA button ----------
+   Shared by the hero CTA and the pricing CTA — one source of truth
+   so a class-name mismatch between components can't silently drop styles. */
+.cta,
+.cta-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--cyan);
+  color: #04141a;
+  font-weight: 600;
+  font-size: 16px;
+  padding: 14px 22px;
+  border-radius: 6px;
+  text-decoration: none;
+  border: 1px solid var(--cyan);
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.cta:hover,
+.cta-button:hover {
+  background: #33f3ff;
+  transform: translateY(-1px);
+}
+
+.cta:focus-visible,
+.cta-button:focus-visible {
+  outline: 3px solid var(--violet);
+  outline-offset: 3px;
+}
+
+/* ---------- Tilted product mockup (hero) ----------
+   A stage holds a blurred duplicate card offset behind the real one,
+   both sharing one exaggerated rotation, so it reads as a screen
+   floating at an angle rather than a flat panel. */
+.mockup-stage {
+  position: relative;
+  flex: 1 1 380px;
+  max-width: 460px;
+  perspective: 1400px;
+}
+
+.mockup-shadow {
+  position: absolute;
+  top: 16px;
+  left: 24px;
+  right: -24px;
+  bottom: -16px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  transform: rotateY(-22deg) rotateX(11deg) rotateZ(-4deg);
+  filter: blur(1px);
+  opacity: 0.35;
+  z-index: 0;
+}
+
+.mockup {
+  position: relative;
+  z-index: 1;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+  transform-style: preserve-3d;
+  transform: rotateY(-22deg) rotateX(11deg) rotateZ(-4deg);
+  box-shadow: 0 40px 70px -10px rgba(0, 0, 0, 0.55), 0 10px 24px rgba(0, 0, 0, 0.35);
+  transition: transform 0.3s ease;
+}
+
+.mockup:hover {
+  transform: rotateY(-14deg) rotateX(6deg) rotateZ(-2deg);
+}
+
+.mockup-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--line);
+}
+
+.mockup-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--line);
+}
+
+.mockup-tabs {
+  margin-left: auto;
+  display: flex;
+  gap: 6px;
+}
+
+.mockup-tab {
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--ink-dim);
+  font-family: inherit;
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.mockup-tab:hover {
+  color: var(--ink);
+}
+
+.mockup-tab:focus-visible {
+  outline: 2px solid var(--violet);
+  outline-offset: 2px;
+}
+
+.mockup-tab.active {
+  background: var(--cyan);
+  color: #04141a;
+  border-color: var(--cyan);
+  font-weight: 600;
+}
+
+.mockup-body {
+  display: flex;
+}
+
+.mockup-nav {
+  width: 88px;
+  flex-shrink: 0;
+  border-right: 1px solid var(--line);
+  padding: 16px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.mockup-nav span {
+  display: block;
+  height: 8px;
+  border-radius: 3px;
+  background: var(--line);
+}
+
+.mockup-nav span.active {
+  background: var(--cyan);
+}
+
+.mockup-main {
+  flex: 1;
+  padding: 16px;
+}
+
+.mockup-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.mockup-stat {
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 10px;
+}
+
+.mockup-stat .num {
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--cyan);
+}
+
+.mockup-stat .lbl {
+  font-size: 11px;
+  color: var(--ink-dim);
+  margin-top: 2px;
+}
+
+.mockup-chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  height: 70px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 10px;
+}
+
+.mockup-chart i {
+  display: block;
+  flex: 1;
+  background: var(--violet);
+  border-radius: 2px 2px 0 0;
+  transition: height 0.25s ease;
+}
+
+@media (max-width: 760px) {
+  .mockup-stage {
+    max-width: 100%;
+    perspective: none;
+  }
+  .mockup {
+    transform: none;
+    box-shadow: none;
+  }
+  .mockup:hover {
+    transform: none;
+  }
+  .mockup-shadow {
+    display: none;
+  }
+}
+
+/* ---------- ROI calculator (zoomed-in mockup) ---------- */
+.calc-mockup {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.calc-mockup-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--line);
+}
+
+.calc-mockup-title {
+  margin-left: 8px;
+  font-size: 13px;
+  color: var(--ink-dim);
+}
+
+.calc-mockup-body {
+  display: flex;
+}
+
+.calc-mockup-nav {
+  width: 120px;
+  padding: 24px 14px;
+}
+
+.calc-mockup-nav span {
+  height: 10px;
+}
+
+.calc-mockup-main {
+  flex: 1;
+  padding: 32px;
+}
+
+.calc-stat-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.calc-stat-card {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.calc-stat-card label {
+  margin-bottom: 2px;
+}
+
+.calc-stat-card output {
+  display: block;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--cyan);
+  margin-bottom: 10px;
+}
+
+.calc-stat-card input[type="range"] {
+  margin: 0;
+}
+
+.calc-highlight {
+  background: var(--slate-2);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 20px 24px;
+  margin-bottom: 20px;
+}
+
+.calc-highlight .result-value {
+  margin: 0;
+}
+
+.calc-mockup-chart {
+  height: 110px;
+  margin-bottom: 16px;
+}
+
+@media (max-width: 760px) {
+  .calc-mockup-body {
+    flex-direction: column;
+  }
+  .calc-mockup-nav {
+    width: 100%;
+    flex-direction: row;
+    border-right: none;
+    border-bottom: 1px solid var(--line);
+  }
+  .calc-stat-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- Sections (general) ---------- */
+section {
+  padding: 64px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+section:last-of-type {
+  border-bottom: none;
+}
+
+h2 {
+  font-size: 26px;
+  font-weight: 700;
+  margin: 0 0 8px;
+}
+
+.lead {
+  color: var(--ink-dim);
+  max-width: 56ch;
+  margin: 0 0 32px;
+}
+
+/* ---------- Result readouts (used by calc-highlight) ---------- */
+.result-label {
+  font-size: 14px;
+  color: var(--ink-dim);
+  margin: 0 0 6px;
+}
+
+.result-value {
+  font-size: clamp(32px, 4vw, 44px);
+  font-weight: 700;
+  color: var(--cyan);
+  margin: 0 0 4px;
+}
+
+.result-note {
+  font-size: 13px;
+  color: var(--ink-dim);
+  margin: 0;
+}
+
+/* ---------- Pricing table ---------- */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+  margin: 0;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--line);
+}
+
+th {
+  color: var(--ink-dim);
+  font-weight: 500;
+  font-size: 13px;
+}
+
+td.tier {
+  color: var(--ink);
+}
+
+.yes {
+  color: var(--cyan);
+}
+
+.no {
+  color: var(--ink-dim);
+}
+
+.table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+
+/* Sits below the table as its own block — keep it OUTSIDE .table-wrap
+   so overflow-x: auto on the table doesn't affect its layout. */
+.pricing-cta {
+  padding: 32px 24px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-top: none;
+  border-radius: 0 0 10px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pricing-cta .cta-button {
+  margin-bottom: 12px;
+}
+
+/* ---------- Footer ---------- */
+footer {
+  padding: 40px 0 64px;
+  color: var(--ink-dim);
+  font-size: 14px;
+}
+
+/* ---------- Accessibility ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .cta,
+  .cta-button {
+    transition: none;
+  }
+  .mockup,
+  .mockup:hover {
+    transition: none;
+  }
+  .mockup-chart i {
+    transition: none;
+  }
+}
