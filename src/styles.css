@@ -196,6 +196,72 @@ h1 {
   outline-offset: 3px;
 }
 
+/* ---------- Pricing and sign-up page ---------- */
+.signup-intro {
+  padding: 72px 0 56px;
+  border-bottom: 1px solid var(--line);
+  border-left: 4px solid var(--violet);
+}
+
+.signup-intro h1 {
+  max-width: 650px;
+}
+
+.signup-intro .sub {
+  margin-bottom: 0;
+}
+
+.signup-content {
+  padding: 64px 0 88px;
+}
+
+.signup-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+  gap: 48px;
+  align-items: start;
+}
+
+.signup-grid h2 {
+  margin: 0 0 22px;
+}
+
+.signup-form {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 28px;
+}
+
+.signup-form input {
+  width: 100%;
+  margin: 0 0 18px;
+  padding: 12px;
+  color: var(--ink);
+  background: var(--slate-2);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  font: inherit;
+}
+
+.signup-form input:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 2px;
+}
+
+.signup-form .cta-button {
+  cursor: pointer;
+  font: inherit;
+  margin-top: 4px;
+}
+
+@media (max-width: 760px) {
+  .signup-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
 /* ---------- Tilted product mockup (hero) ----------
    A stage holds a blurred duplicate card offset behind the real one,
    both sharing one exaggerated rotation, so it reads as a screen

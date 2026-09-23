@@ -2,8 +2,13 @@ import Navbar from './components/Navbar.jsx'
 import Hero from './components/Hero.jsx'
 import ROICalculator from './components/ROICalculator.jsx'
 import PricingTable from './components/PricingTable.jsx'
+import PricingSignup from './components/PricingSignup.jsx'
 
 export default function App() {
+  if (window.location.pathname === '/pricing-signup') {
+    return <PricingSignup />
+  }
+
   return (
     <>
       <Navbar />

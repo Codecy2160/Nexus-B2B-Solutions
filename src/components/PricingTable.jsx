@@ -9,7 +9,7 @@ function Cell({ cell }) {
   return <td className={cell.yes ? 'yes' : cell.text === '—' ? 'no' : undefined}>{cell.text}</td>
 }
 
-export default function PricingTable() {
+export default function PricingTable({ showCta = true }) {
   return (
     <div className="pricing-table">
       <div className="table-wrap">
@@ -32,10 +32,12 @@ export default function PricingTable() {
           </tbody>
         </table>
       </div>
-      <div className="pricing-cta">
-        <button className="cta-button">Get Started</button>
-        <p className="cta-description">Start your free trial today.</p>
-      </div>
+      {showCta && (
+        <div className="pricing-cta">
+          <a className="cta-button" href="/pricing-signup">Get Started</a>
+          <p className="cta-description">Start your free trial today.</p>
+        </div>
+      )}
     </div>
   )
 }
